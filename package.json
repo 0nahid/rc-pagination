@@ -23,7 +23,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "prepare": "npm run build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "json-server": "json-server --watch test/api.json"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -35,6 +36,20 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0",
-    "vite-plugin-dts": "^1.7.1"
-  }
+    "vite-plugin-dts": "^1.7.1",
+    "json-server": "^0.17.4"
+  },
+  "keywords": [
+    "pagination",
+    "react-pagination",
+    "pagination-component",
+    "react",
+    "paging",
+    "page-navigation",
+    "pagination-control",
+    "react-component",
+    "frontend",
+    "ui",
+    "user-interface"
+  ]
 }

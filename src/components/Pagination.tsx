@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PaginationProps } from "../types/paginate";
+
 export const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
@@ -86,7 +87,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         key={index}
         style={{
           cursor: "pointer",
-          padding: "8px 12px",
+          padding: "8px 10px",
           margin: "0 4px",
           border: "1px solid #ccc",
           borderRadius: "4px",
@@ -94,6 +95,10 @@ export const Pagination: React.FC<PaginationProps> = ({
           backgroundColor:
             page === currentPage || page === "..." ? color : "inherit",
           color: page === currentPage || page === "..." ? "#fff" : "inherit",
+          ...(window.innerWidth <= 600 && {
+            padding: "8px 6px",
+            margin: "0 2px",
+          }),
         }}
         onClick={() => {
           if (typeof page === "number") {
@@ -122,11 +127,15 @@ export const Pagination: React.FC<PaginationProps> = ({
         style={{
           cursor: "pointer",
           padding: "8px 12px",
-          margin: "0 4px",
           border: "1px solid #ccc",
           borderRadius: "4px",
           backgroundColor: currentPage === 1 ? `${color}80` : "transparent", // Apply light color only to Prev when disabled
           color: currentPage === 1 ? "#ccc" : "",
+          // Mobile styles
+          ...(window.innerWidth <= 600 && {
+            padding: "8px 6px",
+            margin: "0 2px",
+          }),
         }}
       >
         Prev
@@ -141,6 +150,11 @@ export const Pagination: React.FC<PaginationProps> = ({
           color: "#fff",
           border: "none",
           borderRadius: "4px",
+          // Mobile styles
+          ...(window.innerWidth <= 600 && {
+            padding: "8px 6px",
+            margin: "0 2px",
+          }),
         }}
       >
         {possibleLimits.map((limit) => (
@@ -156,12 +170,16 @@ export const Pagination: React.FC<PaginationProps> = ({
         style={{
           cursor: "pointer",
           padding: "8px 12px",
-          margin: "0 4px",
           border: "1px solid #ccc",
           borderRadius: "4px",
           backgroundColor:
             currentPage === totalPages ? `${color}80` : "transparent", // Apply light color only to Next when disabled
           color: currentPage === totalPages ? "#ccc" : "",
+          // Mobile styles
+          ...(window.innerWidth <= 600 && {
+            padding: "8px 6px",
+            margin: "0 2px",
+          }),
         }}
       >
         Next
