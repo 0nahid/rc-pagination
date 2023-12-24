@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-interface PaginationProps {
-  totalItems: number;
-  itemsPerPage: number;
-  currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
-  color?: string;
-  possibleLimits?: number[];
-}
-
-const Pagination: React.FC<PaginationProps> = ({
+import { PaginationProps } from "../types/paginate";
+export const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
   currentPage,
@@ -23,14 +13,14 @@ const Pagination: React.FC<PaginationProps> = ({
   const [selectedLimit, setSelectedLimit] = useState(itemsPerPage);
 
   useEffect(() => {
-    // Ensure current page is valid based on the new total pages
+    // Ensure the current page is valid based on the new total pages
     if (currentPage > totalPages) {
       handlePageChange(totalPages);
     }
   }, [currentPage, totalPages]);
 
   const handlePageChange = (newPage: number) => {
-    // Ensure new page is within valid range
+    // Ensure the new page is within the valid range
     const validPage = Math.max(1, Math.min(newPage, totalPages));
     // Update the parent component or perform any additional actions
     setCurrentPage(validPage);
@@ -45,74 +35,10 @@ const Pagination: React.FC<PaginationProps> = ({
     setItemsPerPage(newLimit);
   };
 
-  // const renderPageNumbers = () => {
-  //   const pageNumbers: Array<number | string> = [];
-  //   const displayLimit = 10;
-
-  //   if (totalPages <= displayLimit) {
-  //     // If total pages are less than or equal to the display limit, show all pages
-  //     for (let i = 1; i <= totalPages; i++) {
-  //       pageNumbers.push(i);
-  //     }
-  //   } else {
-  //     const midPoint = Math.floor(displayLimit / 2);
-  //     const isNearStart = currentPage <= midPoint + 2;
-  //     const isNearEnd = currentPage >= totalPages - midPoint - 1;
-
-  //     if (isNearStart) {
-  //       // If near the beginning, show pages 1 to displayLimit - 1, then ellipsis, and last page
-  //       for (let i = 1; i < displayLimit - 1; i++) {
-  //         pageNumbers.push(i);
-  //       }
-  //       pageNumbers.push("...");
-  //       pageNumbers.push(totalPages);
-  //     } else if (isNearEnd) {
-  //       // If near the end, show first page, ellipsis, and pages totalPages - displayLimit + 3 to totalPages
-  //       pageNumbers.push(1);
-  //       pageNumbers.push("...");
-  //       for (let i = totalPages - displayLimit + 3; i <= totalPages; i++) {
-  //         pageNumbers.push(i);
-  //       }
-  //     } else {
-  //       // Show first page, ellipsis, current page - midPoint to current page + midPoint, ellipsis, last page
-  //       pageNumbers.push(1);
-  //       pageNumbers.push("...");
-  //       for (let i = currentPage - midPoint; i <= currentPage + midPoint; i++) {
-  //         pageNumbers.push(i);
-  //       }
-  //       pageNumbers.push("...");
-  //       pageNumbers.push(totalPages);
-  //     }
-  //   }
-
-  //   return pageNumbers.map((page, index) => (
-  //     <span
-  //       key={index}
-  //       style={{
-  //         cursor: "pointer",
-  //         padding: "8px 12px",
-  //         margin: "0 4px",
-  //         border: "1px solid #ccc",
-  //         borderRadius: "4px",
-  //         userSelect: "none",
-  //         backgroundColor: page === currentPage || page === "..." ? color : "inherit",
-  //         color: page === currentPage || page === "..." ? "#fff" : "inherit",
-  //       }}
-  //       onClick={() => {
-  //         if (typeof page === "number") {
-  //           handlePageChange(page);
-  //         }
-  //       }}
-  //     >
-  //       {page}
-  //     </span>
-  //   ));
-  // };
-
   const renderPageNumbers = () => {
     const pageNumbers: Array<number | string> = [];
     const displayLimit = 6; // Adjust this value to your desired range
-  
+
     if (totalPages <= displayLimit) {
       // If total pages are less than or equal to the display limit, show all pages
       for (let i = 1; i <= totalPages; i++) {
@@ -120,7 +46,7 @@ const Pagination: React.FC<PaginationProps> = ({
       }
     } else {
       const midPoint = Math.floor(displayLimit / 2);
-  
+
       if (currentPage <= midPoint + 1) {
         // If near the beginning, show pages 1 to displayLimit - 1, then ellipsis, and last page
         for (let i = 1; i <= displayLimit - 1; i++) {
@@ -131,7 +57,7 @@ const Pagination: React.FC<PaginationProps> = ({
         }
         pageNumbers.push(totalPages);
       } else if (currentPage >= totalPages - midPoint) {
-        // If near the end, show first page, ellipsis, and pages totalPages - displayLimit + 3 to totalPages
+        // If near the end, show the first page, ellipsis, and pages totalPages - displayLimit + 3 to totalPages
         pageNumbers.push(1);
         if (currentPage > displayLimit - 2) {
           pageNumbers.push("...");
@@ -140,7 +66,7 @@ const Pagination: React.FC<PaginationProps> = ({
           pageNumbers.push(i);
         }
       } else {
-        // Show first page, ellipsis, current page - midPoint to current page + midPoint, ellipsis, last page
+        // Show the first page, ellipsis, current page - midPoint to current page + midPoint, ellipsis, last page
         pageNumbers.push(1);
         if (currentPage > midPoint + 2) {
           pageNumbers.push("...");
@@ -154,7 +80,7 @@ const Pagination: React.FC<PaginationProps> = ({
         pageNumbers.push(totalPages);
       }
     }
-  
+
     return pageNumbers.map((page, index) => (
       <span
         key={index}
@@ -165,7 +91,8 @@ const Pagination: React.FC<PaginationProps> = ({
           border: "1px solid #ccc",
           borderRadius: "4px",
           userSelect: "none",
-          backgroundColor: page === currentPage || page === "..." ? color : "inherit",
+          backgroundColor:
+            page === currentPage || page === "..." ? color : "inherit",
           color: page === currentPage || page === "..." ? "#fff" : "inherit",
         }}
         onClick={() => {
@@ -178,16 +105,38 @@ const Pagination: React.FC<PaginationProps> = ({
       </span>
     ));
   };
-  
+
+  const handlePrevClick = () => {
+    handlePageChange(currentPage - 1);
+  };
+
+  const handleNextClick = () => {
+    handlePageChange(currentPage + 1);
+  };
 
   return (
     <div>
+      <button
+        onClick={handlePrevClick}
+        disabled={currentPage === 1}
+        style={{
+          cursor: "pointer",
+          padding: "8px 12px",
+          margin: "0 4px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          backgroundColor: currentPage === 1 ? `${color}80` : "transparent", // Apply light color only to Prev when disabled
+          color: currentPage === 1 ? "#ccc" : "",
+        }}
+      >
+        Prev
+      </button>
       <select
         value={selectedLimit}
         onChange={handleLimitChange}
         style={{
           padding: "8px",
-          marginRight: "10px",
+          margin: "0 4px",
           backgroundColor: color,
           color: "#fff",
           border: "none",
@@ -201,8 +150,22 @@ const Pagination: React.FC<PaginationProps> = ({
         ))}
       </select>
       {renderPageNumbers()}
+      <button
+        onClick={handleNextClick}
+        disabled={currentPage === totalPages}
+        style={{
+          cursor: "pointer",
+          padding: "8px 12px",
+          margin: "0 4px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          backgroundColor:
+            currentPage === totalPages ? `${color}80` : "transparent", // Apply light color only to Next when disabled
+          color: currentPage === totalPages ? "#ccc" : "",
+        }}
+      >
+        Next
+      </button>
     </div>
   );
 };
-
-export default Pagination;

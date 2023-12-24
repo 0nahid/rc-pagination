@@ -1,31 +1,84 @@
-# React + TypeScript + Vite
+# **rc-paginate**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A simple and customizable React pagination component.
 
-Currently, two official plugins are available:
+### **Installation**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```markdown
+yarn add rc-paginate
+or 
+npm i rc-paginate
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# react-pagination
+## Usage
+
+### Example
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { Pagination } from 'rc-paginate';
+
+const MyComponent = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(100);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/users?_page=${currentPage}&_limit=${itemsPerPage}`
+        );
+        const data = await response.json();
+        setUsers(data);
+        setTotalItems(100); // Update totalItems based on the total count from your API or set it to a static value
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, itemsPerPage]);
+
+  return (
+    <div>
+      {/* Display your fetched data */}
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+
+      {/* Pagination Component */}
+      <Pagination
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage} // just pass the state
+        setItemsPerPage={setItemsPerPage} // just pass the state
+        color="red" // Optional & dynamic: you can pass any color name or hex value
+        possibleLimits={[2, 4, 6]} // Optional: array of possible items per page
+      />
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+### Props
+
+- `totalItems`: The total number of items in your dataset.
+- `itemsPerPage`: Number of items to display per page.
+- `currentPage`: Current active page.
+- `setCurrentPage`: Function to update the current page.
+- `setItemsPerPage`: Function to update the items per page.
+- `color` (Optional): Color of the pagination buttons. You can pass any color name or hex value.
+- `possibleLimits` (Optional): Array of possible items per page.
+
+### Example Explanation
+
+In this example, we have a component (`MyComponent`) with a state managing the current page, items per page, and total items. The `<Pagination>` component is integrated to handle the pagination functionality. Adjust the `color` and `possibleLimits` props based on your preferences.
+
+Feel free to customize the component's appearance and behavior by updating the state variables and props according to your application's needs.
