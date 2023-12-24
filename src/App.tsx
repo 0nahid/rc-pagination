@@ -44,7 +44,7 @@ const MyComponent = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage} // just pass the state
         setItemsPerPage={setItemsPerPage} // just pass the state
-        color="purple" // Optional & dynamic: you can pass any color name or hex value
+        color="red" // Optional & dynamic: you can pass any color name or hex value
         possibleLimits={[2, 4, 6,10]} // Optional: array of possible items per page
       />
     </div>

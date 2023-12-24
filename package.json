@@ -6,6 +6,11 @@
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "repository": "https://github.com/0nahid/rc-pagination",
+  "license": "MIT",
+  "description": "A simple and customizable pagination component for React",
+  "homepage": "https://github.com/0nahid/rc-pagination",
+  "author": "0nahid",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
