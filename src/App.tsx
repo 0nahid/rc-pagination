@@ -26,13 +26,15 @@ const MyComponent = () => {
     fetchData();
   }, [currentPage, itemsPerPage]);
 
+  // console.log("itemsPerPage", itemsPerPage);
+
   return (
     <div>
       {/* Display your fetched data */}
       <ul>
         {users.map((user, index) => (
           <li key={index + 1}>
-            {index + 1} -  {user.username}
+            {index + 1} - {user.username}
           </li>
         ))}
       </ul>
@@ -45,7 +47,7 @@ const MyComponent = () => {
         setCurrentPage={setCurrentPage} // just pass the state
         setItemsPerPage={setItemsPerPage} // just pass the state
         color="red" // Optional & dynamic: you can pass any color name or hex value
-        possibleLimits={[2, 4, 6,10]} // Optional: array of possible items per page
+        possibleLimits={[7]} // Optional: array of possible items per page
       />
     </div>
   );

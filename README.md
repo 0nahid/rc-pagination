@@ -6,7 +6,7 @@
 
 ```markdown
 yarn add rc-paginate
-or 
+or
 npm i rc-paginate
 ```
 
@@ -15,8 +15,8 @@ npm i rc-paginate
 ### Example
 
 ```jsx
-import React, { useState, useEffect } from 'react';
-import { Pagination } from 'rc-paginate';
+import React, { useState, useEffect } from "react";
+import { Pagination } from "rc-paginate";
 
 const MyComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -75,10 +75,14 @@ export default MyComponent;
 - `setCurrentPage`: Function to update the current page.
 - `setItemsPerPage`: Function to update the items per page.
 - `color` (Optional): Color of the pagination buttons. You can pass any color name or hex value.
-- `possibleLimits` (Optional): Array of possible items per page.
+- `possibleLimits` (Optional): Array of possible items per page. If you pass a number in the array then then the dropdown menu will not be displayed. If more than one number is passed then the dropdown menu will be displayed.
 
 ### Example Explanation
 
 In this example, we have a component (`MyComponent`) with a state managing the current page, items per page, and total items. The `<Pagination>` component is integrated to handle the pagination functionality. Adjust the `color` and `possibleLimits` props based on your preferences.
 
 Feel free to customize the component's appearance and behavior by updating the state variables and props according to your application's needs.
+
+# Contributions
+
+If you want to contribute to this project,fork the [repository](https://github.com/0nahid/rc-pagination) and clone it to your local machine. Commit your changes and push your changes to your forked repository. Finally, open a pull request with a detailed description of your changes. I highly appreciate any contributions.

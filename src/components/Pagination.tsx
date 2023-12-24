@@ -10,8 +10,22 @@ export const Pagination: React.FC<PaginationProps> = ({
   color = "#007",
   possibleLimits = [5, 10, 20, 50],
 }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const [selectedLimit, setSelectedLimit] = useState(itemsPerPage);
+  const [selectedLimit, setSelectedLimit] = useState(
+    possibleLimits.length > 0 ? possibleLimits[0] : 10 // Use the first value as the initial limit, default to 10 if the array is empty
+  );
+  const [totalPages, setTotalPages] = useState(0);
+
+  setItemsPerPage(selectedLimit); 
+
+  console.log("selectedLimit", selectedLimit);
+
+  useEffect(() => {
+    const totalPages = Math.ceil(
+      totalItems / Math.max(selectedLimit, itemsPerPage)
+    );
+    // Now, you can use totalPages as needed
+    setTotalPages(totalPages);
+  }, [totalItems, selectedLimit, itemsPerPage]);
 
   useEffect(() => {
     // Ensure the current page is valid based on the new total pages
@@ -111,6 +125,38 @@ export const Pagination: React.FC<PaginationProps> = ({
     ));
   };
 
+  const renderLimitSelect = () => {
+    if (possibleLimits.length <= 1) {
+      return null; // If there's only one or no option, don't render the select element
+    }
+
+    return (
+      <select
+        value={selectedLimit}
+        onChange={handleLimitChange}
+        style={{
+          padding: "8px",
+          margin: "0 4px",
+          backgroundColor: color,
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          // Mobile styles
+          ...(window.innerWidth <= 600 && {
+            padding: "8px 6px",
+            margin: "0 2px",
+          }),
+        }}
+      >
+        {possibleLimits.map((limit) => (
+          <option key={limit} value={limit}>
+            {limit}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
   const handlePrevClick = () => {
     handlePageChange(currentPage - 1);
   };
@@ -140,7 +186,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       >
         Prev
       </button>
-      <select
+      {/* <select
         value={selectedLimit}
         onChange={handleLimitChange}
         style={{
@@ -162,7 +208,9 @@ export const Pagination: React.FC<PaginationProps> = ({
             {limit}
           </option>
         ))}
-      </select>
+      </select> */}
+      {renderLimitSelect()}
+
       {renderPageNumbers()}
       <button
         onClick={handleNextClick}
