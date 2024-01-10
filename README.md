@@ -122,7 +122,7 @@ We recommend you to post your problems on our Facebook group and Github repo iss
 
 # Support Me
 
-☕ Buy Me a Coffee: https://buymeacoffee.com/TechHelpBD 
+☕ Buy Me a Coffee: https://buymeacoffee.com/0nahid
 
 # Hire Me
 
