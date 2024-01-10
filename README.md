@@ -1,12 +1,26 @@
 # **rc-paginate**
 
 ## A simple and customizable React pagination component.
+## Documentation
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Example](#Example)
+  - [Props](#Props)
+  - [Example Explanation](#Example-Explanation)
+- [Contributions](#Contributions)
+- [Issues](#Issues)
+- [Our Community](#Our-Community)
+- [Support Me](#Support-Me)
+- [Hire Me](#Hire-Me)  
 
 ### **Installation**
 
-```markdown
+```bash
 yarn add rc-paginate
+```
 or
+```bash
 npm i rc-paginate
 ```
 
@@ -86,3 +100,32 @@ Feel free to customize the component's appearance and behavior by updating the s
 # Contributions
 
 If you want to contribute to this project,fork the [repository](https://github.com/0nahid/rc-pagination) and clone it to your local machine. Commit your changes and push your changes to your forked repository. Finally, open a pull request with a detailed description of your changes. I highly appreciate any contributions.
+
+# Issues
+
+If you are facing any problem feel free to share [here](https://github.com/0nahid/rc-pagination/issues)
+
+# Our Community
+
+You can also post your problems in our community for any kind of support 👨‍💻<br>
+
+TechHelpBD is one of the best technology based knowledge sharing Community <br>
+► Like Our Facebook Page=>https://facebook.com/TechHelpBD <br>
+► Join Our Facebook Group=>https://facebook.com/groups/TechHelpBangladesh <br>
+► Join Our Telegram Group=>https://t.me/TechHelpBangladesh <br>
+► Join Our Discord Server=>https://discord.gg/FFyVXZze4F <br>
+► Join Our Whatsapp Group=>https://chat.whatsapp.com/KsnXhnqsG9g3lxXE6nMheE <br>
+► Subscribe Our YouTube Channel=>https://youtube.com/TechHelpBangladesh <br>
+🌐Our Official Website: https://TechHelpBD.com <br>
+
+We recommend you to post your problems on our Facebook group and Github repo issues section first to get early response.
+
+# Support Me
+
+☕ Buy Me a Coffee: https://buymeacoffee.com/0nahid
+
+# Hire Me
+
+❒ Fiverr: https://cutt.ly/qwJsqynC
+
+
